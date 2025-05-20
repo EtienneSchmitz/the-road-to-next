@@ -1,7 +1,7 @@
+import cslx from "clsx";
 import Link from "next/link";
 import { initialTickets } from "@/data";
 import { ticketPath } from "@/paths";
-import cslx from "clsx";
 
 const CheckIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
