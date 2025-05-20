@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button"
 import { homePath, ticketsPath } from "@/paths";
 
 const geistSans = Geist({
@@ -26,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body 
+      <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <nav className="
@@ -36,10 +37,10 @@ export default function RootLayout({
             w-full flex py-2.5 px-5 justify-between
           ">
           <div>
-            <Link className="text-lg font-bold" href={homePath()}>Home</Link>
+              <Link href={homePath()} className={buttonVariants({ variant: 'outline' })}>Home</Link>
           </div>
           <div>
-            <Link className="underline text-sm" href={ticketsPath()}>Tickets</Link>
+            <Link href={ticketsPath()} className={buttonVariants({ variant: 'outline' })}>Tickets</Link>
           </div>
         </nav>
         <main className="
@@ -49,7 +50,7 @@ export default function RootLayout({
             bg-secondary/20
             flex flex-col
           ">
-        {children}
+          {children}
         </main>
       </body>
     </html>
