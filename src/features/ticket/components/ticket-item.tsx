@@ -1,16 +1,18 @@
+import clsx from "clsx";
+import { LucideSquareArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ticketPath } from "@/paths";
 import { TICKET_ICONS } from "../constants";
 import { Ticket } from "../types";
-import { LucideSquareArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 type TicketItemProps = {
-    ticket: Ticket
+    ticket: Ticket;
+    isDetail?: boolean;
 }
 
-const TicketItem = ({ ticket }: TicketItemProps) => {
+const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
     const detailButton = (
         <Button asChild variant="outline" size="icon">
             <Link href={ticketPath(ticket.id)}>
@@ -20,7 +22,11 @@ const TicketItem = ({ ticket }: TicketItemProps) => {
     )
 
     return (
-        <div className="w-full max-w-[420px] flex gap-x-1">
+        <div className={clsx("w-full flex gap-x-1", {
+                "max-w-[580px]": isDetail,
+                "max-w-[420px]": !isDetail,
+            })}
+        >
             <Card key={ticket.id} className="w-full">
                 <CardHeader>
                     <CardTitle className="flex gap-x-2 items-center">
@@ -29,15 +35,17 @@ const TicketItem = ({ ticket }: TicketItemProps) => {
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p className="line-clamp-3 whitespace-break-spaces">
+                    <p className={clsx("whitespace-break-spaces", {
+                            "line-clamp-3 ": !isDetail
+                        })}
+                    >
                         {ticket.content}
                     </p>
                 </CardContent>
             </Card>
-            <div className="flex flex-col gap-y-1">
+            {isDetail ? null : (<div className="flex flex-col gap-y-1">
                 {detailButton}
-                {detailButton}
-            </div>
+            </div>)}
         </div>
     );
 }
