@@ -29,7 +29,6 @@ const eslintConfig = [
   { 
     ignores: ["src/generated/**"],
   },
-
 ];
 
 export default eslintConfig;
