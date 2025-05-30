@@ -15,8 +15,6 @@ const TicketPage = async ({ params }: TicketPageProps) => {
 
     // throw new Error("Network error occurred while fetching tickets"); // Simulate a network error
 
-
-
     if (!ticket) {
         notFound();
     }

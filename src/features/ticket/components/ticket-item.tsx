@@ -1,10 +1,11 @@
 import clsx from "clsx";
-import { LucideSquareArrowUpRight } from "lucide-react";
+import { LucideSquareArrowUpRight, LucideTrash } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Ticket } from "@/generated/prisma/client";
 import { ticketPath } from "@/paths";
+import { deleteTicket } from "../actions/delete-ticket";
 import { TICKET_ICONS } from "../constants";
 
 type TicketItemProps = {
@@ -21,11 +22,19 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
         </Button>
     )
 
+    const deleteButton = (
+        <form action={deleteTicket.bind(null, ticket.id)}>
+            <Button variant="outline" size="icon" className="cursor-pointer">
+                <LucideTrash className="h-4 w-4" />
+            </Button>
+        </form>
+    )
+
     return (
         <div className={clsx("w-full flex gap-x-1", {
-                "max-w-[580px]": isDetail,
-                "max-w-[420px]": !isDetail,
-            })}
+            "max-w-[580px]": isDetail,
+            "max-w-[420px]": !isDetail,
+        })}
         >
             <Card key={ticket.id} className="w-full">
                 <CardHeader>
@@ -36,16 +45,16 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
                 </CardHeader>
                 <CardContent>
                     <p className={clsx("whitespace-break-spaces", {
-                            "line-clamp-3 ": !isDetail
-                        })}
+                        "line-clamp-3 ": !isDetail
+                    })}
                     >
                         {ticket.content}
                     </p>
                 </CardContent>
             </Card>
-            {isDetail ? null : (<div className="flex flex-col gap-y-1">
-                {detailButton}
-            </div>)}
+            <div className="flex flex-col gap-y-1">
+                {isDetail ? deleteButton : detailButton}
+            </div>
         </div>
     );
 }
