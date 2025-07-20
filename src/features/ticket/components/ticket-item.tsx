@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ticketPath } from "@/path";
 import { TICKET_ICONS } from "../constants";
-import { Ticket } from "./types";
+import { Ticket } from "../types";
 
 type TicketItemProps = {
   ticket: Ticket;
